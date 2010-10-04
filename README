@@ -1,2 +1,13 @@
 USAGE:
-$> python convert_tide.py source_file.txt new_file.txt
+$ python convert_tide.py
+Tide Format Converter
+CTRL + C to exit
+Enter the location of file you want to convert: non-existen-file.txt
+'non-existen-file.txt' not found.
+Please enter again the filename you want to convert: waterlevel.txt
+Enter the filename of the output file: converted_waterlevel.txt
+Creating file converted_waterlevel.txt .....
+-------------------------------------------------------------
+Time zone is GMT + 1 hour in the Winter Time
+and GMT + 2 hours in the Summer Time (daylight saving time).
+Press enter to exit
