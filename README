@@ -1,0 +1,2 @@
+USAGE:
+$> python convert_tide.py source_file.txt new_file.txt
