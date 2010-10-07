@@ -1,4 +1,3 @@
-from sys import argv
 import os
 
 """
@@ -36,9 +35,6 @@ try:
             
             #split the line
             pieces = line.split(" ");
-    
-            #add :00 in the time
-            pieces[3] = pieces[3]+":00"
             
             #output in screen and write to file
             #print "%s %s %s %s %s" % (pieces[1], pieces[0], pieces[2], pieces[3], pieces[4]),
