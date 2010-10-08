@@ -1,4 +1,6 @@
 USAGE:
+If you have python installed:
+--------------------------------------------------------------------------------
 $ python convert_tide.py
 Tide Format Converter
 CTRL + C to exit
@@ -8,3 +10,10 @@ Enter the filename of the output file > test.txt
 Creating file test.txt .....
 Conversion successful. The new file is:  test.txt
 Press enter to exit
+--------------------------------------------------------------------------------
+
+You can use the EXE
+--------------------------------------------------------------------------------
+1) Unzip the "convert_tide.zip" file.
+2) Open "convert_tide.exe"
+3) You should see something like above.
