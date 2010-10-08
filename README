@@ -1,6 +1,5 @@
 USAGE:
 $ python convert_tide.py
-$ python convert_tide.py
 Tide Format Converter
 CTRL + C to exit
 Enter the location of file you want to convert > tide.txt
