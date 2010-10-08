@@ -59,7 +59,7 @@ try:
             year = int(pieces[2])
             hour = int(pieces[3])
             minutes = int(pieces[4])
-            tide = float(pieces[5])
+            tide = float(pieces[5])*0.01
             
             #check for first day of month bug here
             if i < 6 and adjustment == 1:
@@ -99,7 +99,7 @@ try:
             else:
                 minute_counter += 10
             
-            new_file.write("%s %s %s %s %s %s\n" % (month, day, year, hour, minutes, tide))
+            new_file.write("%02d %02d %d %02d %02d %07.2f\n" % (month, day, year, hour, minutes, tide))
             
             i += 1
             
