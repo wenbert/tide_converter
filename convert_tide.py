@@ -1,9 +1,13 @@
-import os, sys, datetime
+import os, sys, datetime, calendar
 
 """
 input_file:         your tide input file
 output_file:        the name of the output file
 """
+
+def check_day_of_month(year, month):
+    return calendar.monthrange(year,month)[1]
+    
 print "Tide Format Converter"
 print "CTRL + C to exit"
 
@@ -60,22 +64,27 @@ try:
             #check for first day of month bug here
             if i < 6 and adjustment == 1:
                 day -= 1
-                print "------------------------------"
+                if day == 0:
+                    day = check_day_of_month(year, month)
+                    month -= 1
             
             #check for first day of month bug here
             if i < 12 and adjustment == 2:
                 day -= 1
-                #print "------------------------------"
+                if day == 0:
+                    day = check_day_of_month(year, month)
+                    month -= 1
                 
             if i > 0 and i % 144 == 0:
-                print "------------------------------"
                 trigger_start = True
             
             # for succeeding days
             if trigger_start:
-                #print "##############################"
                 start = start + 1
                 day -= 1
+                if day == 0:
+                    day = check_day_of_month(year, month)
+                    month -= 1
             
             if start > 5 and adjustment == 1:
                 start = 0
@@ -84,17 +93,12 @@ try:
                 start = 0
                 trigger_start = False
             
-            #print month, day, year, hour, minute_counter, tide, "| ", start, ": ", i, ": ", raw_count
-            
             #reset minute_counter
             if minute_counter >= 50:
                 minute_counter = 0
             else:
                 minute_counter += 10
             
-            #output in screen and write to file
-            #print "%s %s %s %s %s" % (pieces[1], pieces[0], pieces[2], pieces[3], pieces[4]),
-            #print month, day, year, hour, minutes, tide
             new_file.write("%s %s %s %s %s %s\n" % (month, day, year, hour, minutes, tide))
             
             i += 1
@@ -102,6 +106,7 @@ try:
         raw_count += 1
         
     new_file.close()
+    print "Conversion successful. The new file is: ", output_file
     
 except:
     print "Unexpected error",  sys.exc_info()[0]
