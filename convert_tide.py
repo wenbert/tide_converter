@@ -99,7 +99,8 @@ try:
             else:
                 minute_counter += 10
             
-            new_file.write("%02d %02d %d %02d %02d %07.2f\n" % (month, day, year, hour, minutes, tide))
+            #new_file.write("%02d %02d %d %02d %02d %07.2f\n" % (month, day, year, hour, minutes, tide))
+            new_file.write("%02d %02d %d %02d %02d %07.2f\n" % (month, day, year, hour, minute_counter, tide))
             
             i += 1
             
