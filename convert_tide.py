@@ -1,3 +1,6 @@
+print "Run main.py instead... This file is obsolete."
+exit()
+
 import os, sys, datetime, calendar
 
 """
