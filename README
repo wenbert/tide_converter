@@ -1,5 +1,11 @@
 USAGE:
-If you have Python installed:
+
+Using the GUI if you have Python installed:
+--------------------------------------------------------------------------------
+    $ python gui.py
+--------------------------------------------------------------------------------
+
+Using the Command Line if you have Python installed:
 --------------------------------------------------------------------------------
     $ python convert_tide.py
     Tide Format Converter
