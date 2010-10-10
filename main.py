@@ -12,7 +12,7 @@ while True:
     if adjustment == 1 or adjustment == 2: break
 
 if os.path.exists(input_file):
-    output_file = raw_input("Enter the filename of the output file >")
+    output_file = raw_input("Enter the filename of the output file > ")
 else:
     pass
 

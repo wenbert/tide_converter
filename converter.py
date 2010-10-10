@@ -33,7 +33,7 @@ class Converter(object):
                 line = line.replace(".", " ") #replace with space
                 line = line.replace(":", " ") #replace with space
                 line = line.replace("\t", " ") #replace with space
-                line = line.replace("\r\r","") #replace with nothing
+                line = line.replace("\r\n","") #replace with nothing
                 
                 pieces = line.split(" ")
                 
