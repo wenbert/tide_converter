@@ -44,21 +44,26 @@ class Converter(object):
                 self.minutes = int(pieces[4])
                 self.tide = float(pieces[5]) * 0.01 #convert tide to meters
                 
+                self.hour -= 1 #minus 1 hour for all.
+                
+                
                 #check for the first day of the month bug
                 if i < 6 and adjustment == 1:
                     self.day -= 1
-                    self.hour -= 1
+                    #self.hour -= 1
                     self.check_hour_of_day()
                     self.check_day_of_month()
                         
                 #check for the first day of the month bug
                 #for 2 hour adjustment
                 if i < 12 and adjustment == 2:
-                    for n in range(0, 2): #do twice
-                        self.day -= 1
-                        self.hour -= 1
-                        self.check_hour_of_day()
-                        self.check_day_of_month()                
+                    self.day -= 1
+                    self.hour -= 1
+                    self.check_hour_of_day()
+                    self.check_day_of_month()
+                    
+                if i > 12 and adjustment == 2:
+                    self.hour -= 1
                         
                 #if after the 2nd day / succeeding days
                 #144 lines == 1 day (with 10 minutes for 24 hours)
@@ -67,9 +72,16 @@ class Converter(object):
                     
                 #check for trigger_start
                 if trigger_start:
-                    start += 1
-                    self.day -= 1
-                    self.check_day_of_month()
+                    if adjustment == 1:
+                        start += 1
+                        self.day -= 1
+                        self.check_hour_of_day()
+                        self.check_day_of_month()
+                    else:
+                        start += 1
+                        self.day -= 1
+                        self.check_hour_of_day()
+                        self.check_day_of_month()
                     
                 if start > 5 and adjustment == 1:
                     start = 0
@@ -125,6 +137,8 @@ class Converter(object):
             Check if the hour is -1. If -1, set to 23 and if -2, set to 22
         """
         self.hour = 24 + self.hour
+        if self.hour == 24:
+            self.hour == 0
     
     def check_day_of_month(self):
         """
