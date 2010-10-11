@@ -10,7 +10,7 @@ class App:
         self.start()
 
     def start(self):
-        self.master.title("Tide ASCII Converter (data source: vannstand.no)")
+        self.master.title("Tide ASCII Converter (data source: vannstand.no) v0.9")
         
         self.now = datetime.datetime.now()
         label01 = "Convert tide data for ASCII Interpreter"
