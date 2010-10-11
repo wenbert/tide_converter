@@ -1,6 +1,6 @@
 from Tkinter import *
 import tkFileDialog, tkMessageBox
-import datetime
+import datetime, os
 from converter import Converter
 
 class App:
@@ -52,25 +52,29 @@ class App:
         self.fileloc.insert(0,self.filename )#set the location to fileloc var
         
     def start_processing(self):
-        print "start processing file..."
+        #print "start processing file..."
         try:
             #print self.fileloc.get()
             #print self.adj.get()
             tide = Converter()
             tide.set_input_file(self.fileloc.get())
             tide.set_adjustment(int(self.adj.get()))
-            tide.set_output_file("tide_%d%d%d%d%d%d.txt" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second))
+            #tide.set_output_file("tide_%d%d%d%d%d%d.txt" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second))
+            tide.set_output_file(self.generate_filename())
             tide.process_file()
             tide.close()
             self.done_processing()
         except:
-            print "Unexpected error",  
+            #print "Unexpected error",  
             tkMessageBox.showerror("Unexpected Error", sys.exc_info())
         
     def done_processing(self):
         tkMessageBox.showinfo("Successful", "Done! Conversion file created.")
-        
-        self.textarea.insert(END, "[%d/%d/%d %d:%d:%d] %s %s hour\n" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second, self.filename, self.adj.get()))
+        #self.textarea.insert(END, "[%d/%d/%d %d:%d:%d] %s %s hour\n" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second, self.filename, self.adj.get()))
+        self.textarea.insert(END, "'%s' created from '%s' | %s hour" % (self.generate_filename(), self.filename,self.adj.get()))
+    
+    def generate_filename(self):
+        return "%s/tide_%d%d%d%d%d%d.txt" % (os.path.dirname(self.fileloc.get()),self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second)
         
 root = Tk()
 app = App(root)
