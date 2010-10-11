@@ -15,7 +15,7 @@ class Converter(object):
         self.year = 0
         self.hour = 0
         self.minutes = 0
-        self.tide = 0.0
+        self.tide = 0
         
     def process_file(self):
         i = 0
@@ -42,7 +42,8 @@ class Converter(object):
                 self.year = int(pieces[2])
                 self.hour = int(pieces[3])
                 self.minutes = int(pieces[4])
-                self.tide = float(pieces[5]) * 0.01 #convert tide to meters
+                #self.tide = float(pieces[5]) * 0.01 #convert tide to meters
+                self.tide = float(pieces[5]) #convert tide to meters
                 
                 self.hour -= 1 #minus 1 hour for all.
                 
@@ -106,7 +107,7 @@ class Converter(object):
             raw_count += 1
         
     def write_to_file(self):
-        self.new_file.write("%02d %02d %d %02d %02d %07.2f\n" % (self.month, self.day, self.year, self.hour, self.minutes, self.tide))
+        self.new_file.write("%02d.%02d.%d %02d:%02d %d\n" % (self.day, self.month, self.year, self.hour, self.minutes, self.tide))
         
     def set_input_file(self,input_file):
         """

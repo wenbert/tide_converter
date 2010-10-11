@@ -18,7 +18,7 @@ class App:
         
         Label(self.master, text="Input file: ").grid(row=1)
         self.fileloc = Entry(self.master)
-        self.fileloc["width"] = 50
+        self.fileloc["width"] = 60
         self.fileloc.focus_set()
         self.fileloc.grid(row=1, column=1)
         
@@ -39,11 +39,13 @@ class App:
             self.adjustment = Radiobutton(self.master, text=text, variable=self.adj, value=mode)
             self.adjustment.grid(row=i, column=1, sticky=W)
             i += 1
+            
         
-        
+        label02 = "FORMAT: \"02.10.2010 22:00 149\" (day.month.year hour:minutes tide(m))"
+        Label(self.master, text=label02).grid(row=7, column=1, sticky=W)
         
         self.submit = Button(self.master, text="EXECUTE", command=self.start_processing, fg="red")
-        self.submit.grid(row=7, column=0, sticky=E)
+        self.submit.grid(row=8, column=2, sticky=E)
         
     def browse_file(self):
         self.filename = tkFileDialog.askopenfilename(title="Open tide file...")
