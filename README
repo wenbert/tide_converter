@@ -1,25 +1,7 @@
 USAGE:
 
 Using the GUI if you have Python installed:
---------------------------------------------------------------------------------
     $ python gui.py
---------------------------------------------------------------------------------
-
-Using the Command Line if you have Python installed:
---------------------------------------------------------------------------------
-    $ python convert_tide.py
-    Tide Format Converter
-    CTRL + C to exit
-    Enter the location of file you want to convert > tide.txt
-    Adjust how many hours? (1 or 2) > 2
-    Enter the filename of the output file > test.txt
-    Creating file test.txt .....
-    Conversion successful. The new file is:  test.txt
-    Press enter to exit
---------------------------------------------------------------------------------
 
 You can use the EXE if you do not have Python installed:
---------------------------------------------------------------------------------
-1) Unzip the "convert_tide.zip" file.
-2) Open "convert_tide.exe"
-3) You should see something like above.
+    Just run "gui.exe" inside the /dist/ directory.
