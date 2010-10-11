@@ -6,23 +6,26 @@ from converter import Converter
 class App:
 
     def __init__(self, master):
-        
-        master.title("Tide ASCII Converter (data source: vannstand.no)")
+        self.master = master
+        self.start()
+
+    def start(self):
+        self.master.title("Tide ASCII Converter (data source: vannstand.no)")
         
         self.now = datetime.datetime.now()
         label01 = "Convert tide data for ASCII Interpreter"
-        Label(master, text=label01).grid(row=0, column=1, sticky=W)
+        Label(self.master, text=label01).grid(row=0, column=1, sticky=W)
         
-        Label(master, text="Input file: ").grid(row=1)
-        self.fileloc = Entry(master)
+        Label(self.master, text="Input file: ").grid(row=1)
+        self.fileloc = Entry(self.master)
         self.fileloc["width"] = 50
         self.fileloc.focus_set()
         self.fileloc.grid(row=1, column=1)
         
-        self.open_file = Button(master, text="Browse...", command=self.browse_file)
+        self.open_file = Button(self.master, text="Browse...", command=self.browse_file)
         self.open_file.grid(row=1, column=2)
         
-        Label(master, text="Adjusment: ").grid(row=3, sticky=N)
+        Label(self.master, text="Adjusment: ").grid(row=3, sticky=N)
         ADJUSTMENTS = [
             ("Adjust by 1 hour", "1"),
             ("Adjust by 2 hours", "2")
@@ -33,20 +36,15 @@ class App:
         
         i = 3
         for text, mode in ADJUSTMENTS:
-            self.adjustment = Radiobutton(master, text=text, variable=self.adj, value=mode)
+            self.adjustment = Radiobutton(self.master, text=text, variable=self.adj, value=mode)
             self.adjustment.grid(row=i, column=1, sticky=W)
             i += 1
         
-        Label(master, text="Message Logs: ").grid(row=5, sticky=NW)
-        self.textarea = Text(master, height=3, width=33)
-        scroll = Scrollbar(master, command=self.textarea.yview)
-        self.textarea.configure(yscrollcommand=scroll.set)
-        self.textarea.grid(row=5, column=1)
-        scroll.grid(row=5, column=2, sticky=W)
         
-        self.submit = Button(master, text="EXECUTE", command=self.start_processing, fg="red")
+        
+        self.submit = Button(self.master, text="EXECUTE", command=self.start_processing, fg="red")
         self.submit.grid(row=7, column=0, sticky=E)
-
+        
     def browse_file(self):
         self.filename = tkFileDialog.askopenfilename(title="Open tide file...")
         self.fileloc.insert(0,self.filename )#set the location to fileloc var
@@ -69,9 +67,8 @@ class App:
             tkMessageBox.showerror("Unexpected Error", sys.exc_info())
         
     def done_processing(self):
-        tkMessageBox.showinfo("Successful", "Done! Conversion file created.")
-        #self.textarea.insert(END, "[%d/%d/%d %d:%d:%d] %s %s hour\n" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second, self.filename, self.adj.get()))
-        self.textarea.insert(END, "'%s' created from '%s' | %s hour" % (self.generate_filename(), self.filename,self.adj.get()))
+        tkMessageBox.showinfo("Successful", "'%s' created from '%s'. Adjustment: %s hour(s)" % (self.generate_filename(), self.filename,self.adj.get()))
+        self.start()
     
     def generate_filename(self):
         return "%s/tide_%d%d%d%d%d%d.txt" % (os.path.dirname(self.fileloc.get()),self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second)
