@@ -6,6 +6,9 @@ from converter import Converter
 class App:
 
     def __init__(self, master):
+        
+        master.title("Tide ASCII Converter (data source: vannstand.no)")
+        
         self.now = datetime.datetime.now()
         label01 = "Convert tide data for ASCII Interpreter"
         Label(master, text=label01).grid(row=0, column=1, sticky=W)
@@ -55,7 +58,7 @@ class App:
             #print self.adj.get()
             tide = Converter()
             tide.set_input_file(self.fileloc.get())
-            tide.set_adjustment(self.adj.get())
+            tide.set_adjustment(int(self.adj.get()))
             tide.set_output_file("tide_%d%d%d%d%d%d.txt" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second))
             tide.process_file()
             tide.close()
@@ -68,7 +71,6 @@ class App:
         tkMessageBox.showinfo("Successful", "Done! Conversion file created.")
         
         self.textarea.insert(END, "[%d/%d/%d %d:%d:%d] %s %s hour\n" % (self.now.year, self.now.month, self.now.day, self.now.hour, self.now.minute, self.now.second, self.filename, self.adj.get()))
-        
         
 root = Tk()
 app = App(root)

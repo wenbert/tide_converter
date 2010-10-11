@@ -25,7 +25,7 @@ class Converter(object):
         start = 0 #will count up to 5 for 1hour adjustment and 11 for 2hours adjustment
         start_line = self.start_line
         input_file = self.input_file
-        adjustment = self.adjustment
+        adjustment = int(self.adjustment)
         
         for line in open(input_file, 'r'):
             if raw_count >= start_line:
